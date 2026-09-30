@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+        Coopera — Save Together. Grow Together.
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% block extra_css %}
+    {% endblock %}
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <a href="/" class="logo">
+            COOPERA<span>.</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="/">Home</a>
+            <a href="#services">Services</a>
+            <a href="#story">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="/admin/" class="login-link">Login</a>
+            <a href="#" class="nav-button">Join Us</a>
+        </div>
+
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer id="contact">
+        <p>© 2026 Coopera. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>
+
+

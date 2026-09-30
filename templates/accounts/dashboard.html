@@ -1,0 +1,385 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block title %}
+Dashboard — Coopera
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="dashboard-sidebar">
+
+        <div class="dashboard-logo">
+            COOPERA<span>.</span>
+        </div>
+
+        <nav class="dashboard-nav">
+
+            <a href="#" class="dashboard-nav-link active">
+                <span>⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#" class="dashboard-nav-link">
+                <span>₦</span>
+                <span>Savings</span>
+            </a>
+
+            <a href="#" class="dashboard-nav-link">
+                <span>↗</span>
+                <span>Contributions</span>
+            </a>
+
+            <a href="#" class="dashboard-nav-link">
+                <span>◈</span>
+                <span>Loans</span>
+            </a>
+
+            <a href="#" class="dashboard-nav-link">
+                <span>≡</span>
+                <span>Transactions</span>
+            </a>
+
+            <a href="#" class="dashboard-nav-link">
+                <span>◎</span>
+                <span>Savings Goals</span>
+            </a>
+
+        </nav>
+
+        <div class="dashboard-sidebar-bottom">
+
+            <a href="#" class="dashboard-nav-link">
+                <span>⚙</span>
+                <span>Profile</span>
+            </a>
+
+            <a href="#" class="dashboard-nav-link logout-link">
+                <span>↪</span>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN DASHBOARD -->
+    <main class="dashboard-main">
+
+        <!-- TOP BAR -->
+        <div class="dashboard-topbar">
+
+            <div>
+                <p class="dashboard-eyebrow">
+                    MEMBER DASHBOARD
+                </p>
+
+                <h1>
+                    Welcome back, {{ user.username }} 👋
+                </h1>
+
+                <p class="dashboard-subtitle">
+                    Here's an overview of your cooperative finances.
+                </p>
+            </div>
+
+            <div class="dashboard-profile">
+                <div class="profile-avatar">
+                    {{ user.username|first|upper }}
+                </div>
+
+                <div>
+                    <strong>{{ user.username }}</strong>
+                    <small>Coopera Member</small>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- FINANCIAL CARDS -->
+        <section class="financial-cards">
+
+            <div class="financial-card savings-card">
+
+                <div class="card-top">
+                    <span>Total Savings</span>
+                    <span class="card-icon">₦</span>
+                </div>
+
+                <h2>₦{{ total_savings|floatformat:2 }}</h2>
+                <p>
+                    Available balance
+                </p>
+
+            </div>
+
+
+            <div class="financial-card contribution-card">
+
+                <div class="card-top">
+                    <span>Total Contributions</span>
+                    <span class="card-icon">↗</span>
+                </div>
+
+                <h2>₦{{ total_contributions|floatformat:2 }}</h2>
+
+                <p>
+                    Cooperative contributions
+                </p>
+
+            </div>
+
+
+            <div class="financial-card loan-card">
+
+                <div class="card-top">
+                    <span>Active Loan</span>
+                    <span class="card-icon">◈</span>
+                </div>
+
+                <h2>₦{{ active_loan_amount|floatformat:2 }}</h2>
+
+                <p>
+                    Outstanding balance
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTENT GRID -->
+        <section class="dashboard-content-grid">
+
+            <!-- SAVINGS CHART -->
+            <div class="dashboard-panel savings-overview">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="panel-label">
+                            SAVINGS
+                        </span>
+
+                        <h2>
+                            Savings overview
+                        </h2>
+                    </div>
+
+                    <select>
+                        <option>This year</option>
+                        <option>Last 6 months</option>
+                        <option>Last 3 months</option>
+                    </select>
+
+                </div>
+
+               <div class="chart-placeholder">
+
+                    <canvas id="savingsChart"></canvas>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK ACTIONS -->
+            <div class="dashboard-panel quick-actions">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="panel-label">
+                            QUICK ACTIONS
+                        </span>
+
+                        <h2>
+                            What would you like to do?
+                        </h2>
+                    </div>
+
+                </div>
+
+                <div class="action-grid">
+
+                    <a href="#" class="action-card">
+                        <span class="action-icon">₦</span>
+                        <strong>Deposit</strong>
+                        <small>Add money to savings</small>
+                    </a>
+
+                    <a href="#" class="action-card">
+                        <span class="action-icon">↗</span>
+                        <strong>Contribute</strong>
+                        <small>Make a contribution</small>
+                    </a>
+
+                    <a href="#" class="action-card">
+                        <span class="action-icon">◈</span>
+                        <strong>Apply for Loan</strong>
+                        <small>Request business funding</small>
+                    </a>
+
+                    <a href="#" class="action-card">
+                        <span class="action-icon">◎</span>
+                        <strong>New Goal</strong>
+                        <small>Create a savings goal</small>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECENT TRANSACTIONS -->
+        <section class="dashboard-panel transactions-panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <span class="panel-label">
+                        ACTIVITY
+                    </span>
+
+                    <h2>
+                        Recent transactions
+                    </h2>
+                </div>
+
+                <a href="#">
+                    View all →
+                </a>
+
+            </div>
+
+            <div class="transactions-list">
+
+    {% for transaction in recent_transactions %}
+
+        <div class="transaction-row">
+
+            <div class="transaction-icon">
+                ₦
+            </div>
+
+            <div class="transaction-info">
+                <strong>
+                    {{ transaction.get_transaction_type_display }}
+                </strong>
+
+                <small>
+                    {{ transaction.description|default:"Coopera transaction" }}
+                </small>
+            </div>
+
+            <div class="transaction-amount">
+                <strong>
+                    ₦{{ transaction.amount|floatformat:2 }}
+                </strong>
+
+                <small>
+                    {{ transaction.created_at|date:"d M Y" }}
+                </small>
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <div class="empty-transactions">
+
+            <div class="empty-icon">
+                ₦
+            </div>
+
+            <h3>
+                No transactions yet
+            </h3>
+
+            <p>
+                Your recent deposits, contributions and
+                other transactions will appear here.
+            </p>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+        </section>
+
+    </main>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const months = {{ months|safe }};
+    const savingsValues = {{ savings_values|safe }};
+
+    const monthNames = [
+        'Jan', 'Feb', 'Mar', 'Apr',
+        'May', 'Jun', 'Jul', 'Aug',
+        'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+
+    const chartLabels = months.map(
+        month => monthNames[month - 1]
+    );
+
+    const ctx = document.getElementById('savingsChart');
+
+    new Chart(ctx, {
+        type: 'line',
+
+        data: {
+            labels: chartLabels,
+
+            datasets: [{
+                label: 'Savings',
+
+                data: savingsValues,
+
+                tension: 0.4,
+
+                fill: true,
+
+                borderWidth: 3,
+
+                pointRadius: 4
+            }]
+        },
+
+        options: {
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

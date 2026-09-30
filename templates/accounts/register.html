@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Create Account — Coopera
+{% endblock %}
+
+{% block content %}
+
+<section style="padding: 150px 8%;">
+
+    <h1>Create your account</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div>
+            <label>Username</label>
+            <input type="text" name="username" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label>Email</label>
+            <input type="email" name="email" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label>Password</label>
+            <input type="password" name="password" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label>Confirm Password</label>
+            <input type="password" name="password2" required>
+        </div>
+
+        <br>
+
+        <button type="submit">
+            Create Account
+        </button>
+
+    </form>
+
+</section>
+
+{% endblock %}

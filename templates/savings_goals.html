@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Savings Goals — Coopera
+{% endblock %}
+
+{% block content %}
+
+<h1>My Savings Goals</h1>
+
+{% for goal in goals %}
+
+    <div>
+        <h2>{{ goal.name }}</h2>
+
+        <p>
+            Target: ₦{{ goal.target_amount|floatformat:2 }}
+        </p>
+
+        <p>
+            Saved: ₦{{ goal.current_amount|floatformat:2 }}
+        </p>
+    </div>
+
+{% empty %}
+
+    <p>You don't have any savings goals yet.</p>
+
+{% endfor %}
+
+{% endblock %}

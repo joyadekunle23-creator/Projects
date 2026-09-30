@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Login — Coopera
+{% endblock %}
+
+{% block content %}
+
+<section style="padding: 150px 8%;">
+
+    <h1>Welcome back</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div>
+            <label>Username</label>
+            <input type="text" name="username" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label>Password</label>
+            <input type="password" name="password" required>
+        </div>
+
+        <br>
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+</section>
+
+{% endblock %}
